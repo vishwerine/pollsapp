@@ -1,0 +1,175 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="polls app for context dependent semantic image retrieval">
+    <meta name="author" content="Vishwash Batra">
+    <meta name="generator" content="Jekyll v3.8.5">
+    <title>Human Evaluation - Stepwise Recipe Image Retrieval  </title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/jumbotron/">
+
+    <!-- Bootstrap core CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+    <!-- Custom styles for this template -->
+    <link href="jumbotron.css" rel="stylesheet">
+
+
+  </head>
+
+
+
+  <body>
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+  <a class="navbar-brand" href="/polls/"> PollApp </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="/polls/">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#"> Instructions </a>
+      </li>
+
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Algorithms</a>
+        <div class="dropdown-menu" aria-labelledby="dropdown01">
+          <a class="dropdown-item" href="#">DeepNN</a>
+          <a class="dropdown-item" href="#">Context-models</a>
+          <a class="dropdown-item" href="#">Non-context-models</a>
+        </div>
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+  </div>
+</nav>
+
+<main role="main">
+
+  <!-- Main jumbotron for a primary marketing message or call to action -->
+  <div class="jumbotron">
+    <div class="container">
+
+
+    <h2 id="grid-options">  Recipe id - {{ recipe_id }}</h2>
+
+
+
+<form action="/polls/vote">
+
+<table class="table table-bordered table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th class="text-center">
+        img1 <br />
+        
+      </th>
+      <th class="text-center">
+        img2<br />
+        
+      </th>
+      <th class="text-center">
+        img3<br />
+        
+      </th>
+      
+    </tr>
+  </thead>
+  <tbody>
+
+
+  	{% for pair in pairs %}
+    <tr>
+      <th class="text-wrap" scope="row"> {{ pair.question_text }} </th>
+
+     
+       
+      
+      <td>
+      <input type="checkbox" name="{{ pair.id }}" value="img1"> 
+          
+       <img src=" {% static pair.image_src %}" class="mr-3" alt="..." height="150" width="150"> 
+     
+      </input>
+      </td>
+     
+      <td> 
+        <input type="checkbox" name="{{ pair.id }}" value="img2"> 
+        <img src=" {% static pair.choice1_src %}" class="mr-3" alt="..." height="150" width="150">
+        </input>
+         </td>
+
+      <td> 
+        <input type="checkbox" name="{{ pair.id }}" value="img3"> 
+        <img src=" {% static pair.choice2_src %}" class="mr-3" alt="..." height="150" width="150"> 
+      </input> 
+      </td>
+     
+    </tr>
+    {% endfor %}
+
+    <tr>
+      <td> </td>
+
+      <td> <input type="checkbox" name="{{ recipe_id }}" value="seq1" checked="checked"> Good Image seq </td>
+      <td> <input type="checkbox" name="{{ recipe_id }}" value="seq2" > Good Image seq </td>
+      <td> <input type="checkbox" name="{{ recipe_id }}" value="seq3" > Good Image seq </td>
+
+    </tr>
+
+  </tbody>
+</table>
+
+
+
+<input type="hidden" id="custId" name="id" value="{{userid}}">
+<input type="submit" value="Submit">
+</form>
+
+
+
+  </div> <!-- /container -->
+
+</main>
+
+<footer class="container">
+  <p>&copy; University of Warwick 2019</p>
+</footer>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
+
+</body>
+</html>
